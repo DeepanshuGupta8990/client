@@ -1,0 +1,29 @@
+.widget {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.widget h2 {
+  margin-top: 0;
+  color: #333;
+}
+
+.charts {
+  /* background-color: #f9f9f9; */
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 1rem;
+  width: 30%;
+  margin-bottom: 1rem;
+}
+
+.bottom-padding {
+  padding-bottom: .5rem;
+}
+
+.right-padding {
+  padding-right: 9rem;
+}

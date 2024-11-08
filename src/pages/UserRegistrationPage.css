@@ -1,0 +1,27 @@
+
+.signup-button {
+  width: 100%;
+  padding: 0.75rem;
+  margin-left: .2rem;
+  background-color: #1877f2;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.signup-button:hover {
+  background-color: #166fe5;
+}
+
+.blue-text-padding {
+  color: blue;
+  padding-bottom: 1rem;
+}
+
+.red-text-padding {
+  color: red;
+  padding-bottom: 1rem;
+}
