@@ -33,6 +33,9 @@ const XNavigation = () => {
           <MenuItem onClick={() => navigate('/cve')} icon={<AddModeratorIcon />}>
             CVE
           </MenuItem>
+          <MenuItem onClick={() => navigate('/cvss_score')} icon={<AddModeratorIcon />}>
+            CVSS Score
+          </MenuItem>
           <MenuItem onClick={() => navigate('/cpe')} icon={<LocalPoliceIcon />}>
             CPE
           </MenuItem>

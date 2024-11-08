@@ -8,12 +8,14 @@ import XPieChart from '../components/XPieChart';
 
 import {config} from '../config';
 import XHistogramChart from '../components/XHistogramChart';
+import XDoublePieChart from '../components/XDoublePieChart';
 
 
 const Dashboard: React.FC = () => {
   const PATCHES_CVE_API = config.authApiUrl + "/reports/patches/cve"
   const PACKAGES_CVE_API = config.authApiUrl + "/reports/packages/cve"
   const WEB_SECURITY_API = config.authApiUrl + "/reports/wasc/cwe"
+  const CVSS_SCORE_API = config.authApiUrl + "/reports/cvss_scores/cve"
 
   return (
     <div>
@@ -45,10 +47,22 @@ const Dashboard: React.FC = () => {
         </Grid> */}
       </Grid>
       <Grid container spacing={3} style={{ padding: 20}} >
-      <Grid item xs={12} sm={6} md={4}>
+        <Grid item xs={12} sm={6} md={4}>
           <Paper style={{ padding: 20 }}>
-            <Typography variant="h6">TODO</Typography>
-            <XHistogramChart />
+            <Typography variant="h6">CVSS Score</Typography>
+            <XHistogramChart apiUrl={CVSS_SCORE_API}/>
+          </Paper>
+        </Grid>
+        <Grid item xs={12} sm={6} md={4}>
+          <Paper style={{ padding: 20 }}>
+            <Typography variant="h6">CVSS Score</Typography>
+            <XPieChart apiUrl={CVSS_SCORE_API}/>
+          </Paper>
+        </Grid>
+        <Grid item xs={12} sm={6} md={4}>
+          <Paper style={{ padding: 20 }}>
+            <Typography variant="h6">CVSS Score</Typography>
+            <XDoublePieChart apiUrl={CVSS_SCORE_API}/>
           </Paper>
         </Grid>
       </Grid>

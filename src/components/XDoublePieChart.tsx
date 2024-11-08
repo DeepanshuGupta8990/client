@@ -10,7 +10,7 @@ interface XPieChartProps {
   apiUrl: string;
 }
 
-const XPieChart: React.FC<XPieChartProps> = ({apiUrl}) => {
+const XDoublePieChart: React.FC<XPieChartProps> = ({apiUrl}) => {
   const [data, setData ] = useState([]);
   const token = window.localStorage.getItem('token');
 
@@ -57,7 +57,7 @@ const XPieChart: React.FC<XPieChartProps> = ({apiUrl}) => {
           cy="50%"
           labelLine={false}
           label={renderCustomizedLabel}
-          outerRadius={150}
+          outerRadius={50}
           fill="#8884d8"
           dataKey="value"
         >
@@ -65,6 +65,23 @@ const XPieChart: React.FC<XPieChartProps> = ({apiUrl}) => {
             <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
           ))}
         </Pie>
+        <Pie
+          data={data}
+          cx="50%"
+          cy="50%"
+          labelLine={false}
+          label={renderCustomizedLabel}
+          innerRadius={60}
+          outerRadius={80}
+          fill="#8884d8"
+          dataKey="value"
+        >
+          {data.map((entry, index) => (
+            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+          ))}
+        </Pie>
+
+        
         <Tooltip />
         <Legend />
       </PieChart>
@@ -72,4 +89,4 @@ const XPieChart: React.FC<XPieChartProps> = ({apiUrl}) => {
   );
 };
 
-export default XPieChart;
+export default XDoublePieChart;
