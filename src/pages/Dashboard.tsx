@@ -8,14 +8,13 @@ import XPieChart from '../components/XPieChart';
 
 import {config} from '../config';
 import XHistogramChart from '../components/XHistogramChart';
-import XDoublePieChart from '../components/XDoublePieChart';
-
+import TopCweChart from '../panels/TopCweChart';
+import TopExploitsChart from '../panels/TopExploitsChart';
+import MostAffectedPackageChart from '../panels/MostAffectedPackageChart';
+import VulnerabilityCpeDistributionChart from '../panels/VulnerabilityCpeDistributionChart';
 
 const Dashboard: React.FC = () => {
-  const PATCHES_CVE_API = config.authApiUrl + "/reports/patches/cve"
-  const PACKAGES_CVE_API = config.authApiUrl + "/reports/packages/cve"
-  const WEB_SECURITY_API = config.authApiUrl + "/reports/wasc/cwe"
-  const CVSS_SCORE_API = config.authApiUrl + "/reports/cvss_scores/cve"
+  const CVE_VULN_API = config.vfeedApiUrl + "/reports/cve/vulnerabilities"
 
   return (
     <div>
@@ -23,46 +22,40 @@ const Dashboard: React.FC = () => {
       <Grid container spacing={3} style={{ padding: 20 }}>
         <Grid item xs={12} sm={6} md={4}>
           <Paper style={{ padding: 20 }}>
-            <Typography variant="h6">Patches</Typography>
-            <XPieChart apiUrl={PATCHES_CVE_API}/>
+            <Typography variant="h6">CVE Top Vulnerability</Typography>
+            <XHistogramChart apiUrl={CVE_VULN_API}/>
           </Paper>
         </Grid>
         <Grid item xs={12} sm={6} md={4}>
           <Paper style={{ padding: 20 }}>
-            <Typography variant="h6">Packages</Typography>
-            <XPieChart apiUrl={PACKAGES_CVE_API}/>
+            <Typography variant="h6">Most Affected Package Vendors</Typography>
+            <MostAffectedPackageChart />
           </Paper>
         </Grid>
         <Grid item xs={12} sm={6} md={4}>
           <Paper style={{ padding: 20 }}>
-            <Typography variant="h6">Web Security</Typography>
-            <XPieChart apiUrl={WEB_SECURITY_API}/>
+            <Typography variant="h6">Most Affected Patches Vendors</Typography>
+            <MostAffectedPackageChart />
           </Paper>
         </Grid>
-        {/* <Grid item xs={12} sm={6} md={3}>
-          <Paper style={{ padding: 20 }}>
-            <Typography variant="h6">Panel 4</Typography>
-            <Typography>Content for Panel 4</Typography>
-          </Paper>
-        </Grid> */}
       </Grid>
       <Grid container spacing={3} style={{ padding: 20}} >
         <Grid item xs={12} sm={6} md={4}>
           <Paper style={{ padding: 20 }}>
-            <Typography variant="h6">CVSS Score</Typography>
-            <XHistogramChart apiUrl={CVSS_SCORE_API}/>
+            <Typography variant="h6">Vulnerability CPE Distribution</Typography>
+            <VulnerabilityCpeDistributionChart />
           </Paper>
         </Grid>
         <Grid item xs={12} sm={6} md={4}>
           <Paper style={{ padding: 20 }}>
-            <Typography variant="h6">CVSS Score</Typography>
-            <XPieChart apiUrl={CVSS_SCORE_API}/>
+            <Typography variant="h6">Top 10 CWE</Typography>
+            <TopCweChart />
           </Paper>
         </Grid>
         <Grid item xs={12} sm={6} md={4}>
           <Paper style={{ padding: 20 }}>
-            <Typography variant="h6">CVSS Score</Typography>
-            <XDoublePieChart apiUrl={CVSS_SCORE_API}/>
+            <Typography variant="h6">Top 10 Exploits</Typography>
+            <TopExploitsChart />
           </Paper>
         </Grid>
       </Grid>

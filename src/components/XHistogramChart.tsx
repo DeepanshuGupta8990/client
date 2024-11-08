@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell } from 'recharts';
+import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid, Legend } from 'recharts';
 
 import { handleLogout } from '../helpers/utils';
 
@@ -37,15 +37,25 @@ const XHistogramChart: React.FC<XHistogramChartProps> = ({apiUrl}) => {
 
   return (
     <ResponsiveContainer width="100%" height={400}>
-      <BarChart data={data} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
+      <BarChart
+        data={data}
+        margin={{
+          top: 20,
+          right: 30,
+          left: 20,
+          bottom: 5,
+        }}
+      >
+        {/* <CartesianGrid strokeDasharray="3 3" /> */}
         <XAxis dataKey="name" />
         <YAxis />
         <Tooltip />
-        <Bar dataKey="value">
-          {data.map((entry, index) => (
-            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-          ))}
-        </Bar>
+        <Legend />
+
+        <Bar dataKey="count" fill={COLORS[0]} />
+        <Bar dataKey="exploit_count" fill={COLORS[1]} />
+        <Bar dataKey="patch_count" fill={COLORS[2]} />
+        <Bar dataKey="detection_count" fill={COLORS[3]} />
       </BarChart>
     </ResponsiveContainer>
   );

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from 'recharts';
 
 import { handleLogout } from '../helpers/utils';
 
@@ -8,9 +8,10 @@ const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#AA1142'];
 
 interface XPieChartProps {
   apiUrl: string;
+  convertJsonObject: (data: any) => []
 }
 
-const XPieChart: React.FC<XPieChartProps> = ({apiUrl}) => {
+const XPieChart: React.FC<XPieChartProps> = ({apiUrl, convertJsonObject}) => {
   const [data, setData ] = useState([]);
   const token = window.localStorage.getItem('token');
 
@@ -22,8 +23,8 @@ const XPieChart: React.FC<XPieChartProps> = ({apiUrl}) => {
           Authorization: `Bearer ${token}`
         }
       }).then((res) => {
-        console.log(res.data.data);
-        setData(res.data.data);
+        const convObj = convertJsonObject(res.data.data);
+        setData(convObj);
       }).catch((err) => {
         console.log(err)
         if(err.status == 401) {
@@ -59,14 +60,13 @@ const XPieChart: React.FC<XPieChartProps> = ({apiUrl}) => {
           label={renderCustomizedLabel}
           outerRadius={150}
           fill="#8884d8"
-          dataKey="value"
+          dataKey="count"
         >
           {data.map((entry, index) => (
             <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
           ))}
         </Pie>
         <Tooltip />
-        <Legend />
       </PieChart>
     </ResponsiveContainer>
   );
