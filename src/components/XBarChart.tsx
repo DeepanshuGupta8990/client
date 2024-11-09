@@ -45,7 +45,9 @@ const XBarChart: React.FC<XBarChartProps> = ({apiUrl, convertJsonObject}) => {
         <div className="custom-tooltip">
           <p className="label">{`${label} : ${payload[0].value}`}</p>
           <p className="intro">{`Year : ${payload[0].payload.year}`}</p>
+          {payload[0].payload.title ?
           <p className="intro">{`Title : ${payload[0].payload.title}`}</p>
+          : null}
         </div>
       );
     }

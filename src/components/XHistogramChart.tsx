@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid, Legend } from 'recharts';
+import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Legend } from 'recharts';
 
 import { handleLogout } from '../helpers/utils';
 
@@ -8,9 +8,15 @@ const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#AA1142'];
 
 interface XHistogramChartProps {
   apiUrl: string;
+  dataKeys: Array<string>;
+  xAxisKey: string;
 }
 
-const XHistogramChart: React.FC<XHistogramChartProps> = ({apiUrl}) => {
+const XHistogramChart: React.FC<XHistogramChartProps> = ({
+  apiUrl,
+  dataKeys = ["count", "exploit_count", "patch_count", "detection_count"],
+  xAxisKey = 'name'
+}) => {
 
   const [data, setData ] = useState([]);
   const token = window.localStorage.getItem('token');
@@ -46,16 +52,14 @@ const XHistogramChart: React.FC<XHistogramChartProps> = ({apiUrl}) => {
           bottom: 5,
         }}
       >
-        {/* <CartesianGrid strokeDasharray="3 3" /> */}
-        <XAxis dataKey="name" />
+        <XAxis dataKey={xAxisKey} />
         <YAxis />
         <Tooltip />
         <Legend />
 
-        <Bar dataKey="count" fill={COLORS[0]} />
-        <Bar dataKey="exploit_count" fill={COLORS[1]} />
-        <Bar dataKey="patch_count" fill={COLORS[2]} />
-        <Bar dataKey="detection_count" fill={COLORS[3]} />
+        {dataKeys.map((entry, index) => (
+            <Bar dataKey={dataKeys[index]} fill={COLORS[index % COLORS.length]} />
+        ))}
       </BarChart>
     </ResponsiveContainer>
   );

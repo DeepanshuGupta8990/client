@@ -4,17 +4,16 @@ import {
   Paper, 
   Typography
 } from '@mui/material';
-import XPieChart from '../components/XPieChart';
 
-import {config} from '../config';
-import XHistogramChart from '../components/XHistogramChart';
 import TopCweChart from '../panels/TopCweChart';
 import TopExploitsChart from '../panels/TopExploitsChart';
 import MostAffectedPackageChart from '../panels/MostAffectedPackageChart';
 import VulnerabilityCpeDistributionChart from '../panels/VulnerabilityCpeDistributionChart';
+import TopVulnerabilityChart from '../panels/TopVulnerabilityChart';
+import TopTrendingVulnerabilityChart from '../panels/TopTrendingVulnerabilityChart';
+import VulnerabilityDisclosureChart from '../panels/VulnerabilityDisclosureChart';
 
 const Dashboard: React.FC = () => {
-  const CVE_VULN_API = config.vfeedApiUrl + "/reports/cve/vulnerabilities"
 
   return (
     <div>
@@ -23,7 +22,7 @@ const Dashboard: React.FC = () => {
         <Grid item xs={12} sm={6} md={4}>
           <Paper style={{ padding: 20 }}>
             <Typography variant="h6">CVE Top Vulnerability</Typography>
-            <XHistogramChart apiUrl={CVE_VULN_API}/>
+            <TopVulnerabilityChart />
           </Paper>
         </Grid>
         <Grid item xs={12} sm={6} md={4}>
@@ -56,6 +55,21 @@ const Dashboard: React.FC = () => {
           <Paper style={{ padding: 20 }}>
             <Typography variant="h6">Top 10 Exploits</Typography>
             <TopExploitsChart />
+          </Paper>
+        </Grid>
+      </Grid>
+
+      <Grid container spacing={3} style={{ padding: 20}} >
+        <Grid item xs={12} sm={6} md={8}>
+          <Paper style={{ padding: 20 }}>
+            <Typography variant="h6">Top Trending Vulnerabilities</Typography>
+            <TopTrendingVulnerabilityChart />
+          </Paper>
+        </Grid>
+        <Grid item xs={12} sm={6} md={4}>
+          <Paper style={{ padding: 20 }}>
+            <Typography variant="h6">Vulnerabilities with Recent Disclosures</Typography>
+            <VulnerabilityDisclosureChart />
           </Paper>
         </Grid>
       </Grid>
