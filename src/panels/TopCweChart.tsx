@@ -2,7 +2,7 @@ import XBarChart from '../components/XBarChart';
 import {config} from '../config';
   
 const TopCweChart: React.FC = () => {
-    const TOP_CWE_API = config.vfeedApiUrl + "/reports/cwe/cve/top"
+    const TOP_CWE_API = config.vfeedApiUrl + "/reports/top_cwe"
     
     // Function to convert SourceObject to TargetObject
     function convertJsonObject(source: any) {

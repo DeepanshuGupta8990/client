@@ -2,7 +2,7 @@ import XPieChart from '../components/XPieChart';
 import {config} from '../config';
   
 const MostAffectedPackageChart: React.FC = () => {
-    const PACKAGES_CVE_API = config.vfeedApiUrl + "/reports/packages/cve"
+    const PACKAGES_CVE_API = config.vfeedApiUrl + "/reports/most_affected_package_vendors"
     
     // Function to convert SourceObject to TargetObject
     function convertJsonObject(source: any) {

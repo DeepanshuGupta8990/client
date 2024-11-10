@@ -5,11 +5,12 @@ import {
   Typography
 } from '@mui/material';
 
+import TopVulnerabilityChart from '../panels/TopVulnerabilityChart';
+import MostAffectedPackageChart from '../panels/MostAffectedPackageChart';
+import MostAffectedPatchesChart from '../panels/MostAffectedPatchesChart';
+import VulnerabilityCpeDistributionChart from '../panels/VulnerabilityCpeDistributionChart';
 import TopCweChart from '../panels/TopCweChart';
 import TopExploitsChart from '../panels/TopExploitsChart';
-import MostAffectedPackageChart from '../panels/MostAffectedPackageChart';
-import VulnerabilityCpeDistributionChart from '../panels/VulnerabilityCpeDistributionChart';
-import TopVulnerabilityChart from '../panels/TopVulnerabilityChart';
 import TopTrendingVulnerabilityChart from '../panels/TopTrendingVulnerabilityChart';
 import VulnerabilityDisclosureChart from '../panels/VulnerabilityDisclosureChart';
 
@@ -34,7 +35,7 @@ const Dashboard: React.FC = () => {
         <Grid item xs={12} sm={6} md={4}>
           <Paper style={{ padding: 20 }}>
             <Typography variant="h6">Most Affected Patches Vendors</Typography>
-            <MostAffectedPackageChart />
+            <MostAffectedPatchesChart />
           </Paper>
         </Grid>
       </Grid>
