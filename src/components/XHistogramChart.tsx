@@ -55,11 +55,12 @@ const XHistogramChart: React.FC<XHistogramChartProps> = ({
         <XAxis dataKey={xAxisKey} />
         <YAxis />
         <Tooltip />
-        <Legend />
 
         {dataKeys.map((entry, index) => (
             <Bar dataKey={dataKeys[index]} fill={COLORS[index % COLORS.length]} />
         ))}
+
+        <Legend />
       </BarChart>
     </ResponsiveContainer>
   );

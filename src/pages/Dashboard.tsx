@@ -14,6 +14,9 @@ import TopExploitsChart from '../panels/TopExploitsChart';
 import TopTrendingVulnerabilityChart from '../panels/TopTrendingVulnerabilityChart';
 import VulnerabilityDisclosureChart from '../panels/VulnerabilityDisclosureChart';
 import HistoricGrowthTrendVulnChart from '../panels/HistoricGrowthTrendVulnChart';
+import ExploitGrowthTrendChart from '../panels/ExploitGrowthTrendChart';
+import ExploitMaturityChart from '../panels/ExploitMaturityChart';
+import HistoricGrowthTrendPackageVulnChart from '../panels/HistoricGrowthTrendPackageVulnChart';
 
 const Dashboard: React.FC = () => {
 
@@ -82,6 +85,28 @@ const Dashboard: React.FC = () => {
       </Grid>
 
       {/* Panel Row 4 */}
+      <Grid container spacing={3} style={{ padding: 20}} >
+        <Grid item xs={12} sm={6} md={4}>
+          <Paper style={{ padding: 20 }}>
+            <Typography variant="h6">Exploit Growth Trend of Vulnerability and CVEs</Typography>
+            <ExploitGrowthTrendChart />
+          </Paper>
+        </Grid>
+        <Grid item xs={12} sm={6} md={4}>
+          <Paper style={{ padding: 20 }}>
+            <Typography variant="h6">Exploit Maturity Exploits</Typography>
+            <ExploitMaturityChart />
+          </Paper>
+        </Grid>
+        <Grid item xs={12} sm={6} md={4}>
+          <Paper style={{ padding: 20 }}>
+            <Typography variant="h6">Historical Growth Trend of Package Vulnerability</Typography>
+            <HistoricGrowthTrendPackageVulnChart />
+          </Paper>
+        </Grid>
+      </Grid>
+
+      {/* Panel Row 5 */}
       <Grid container spacing={3} style={{ padding: 20}} >
         <Grid item xs={12} sm={6} md={12}>
           <Paper style={{ padding: 20 }}>

@@ -49,6 +49,26 @@ const XPieChart: React.FC<XPieChartProps> = ({apiUrl, convertJsonObject}) => {
     );
   };
 
+  const CustomTooltip = (obj: any) => {
+    const { active, payload } = obj;
+    if (active && payload && payload.length) {
+        console.log(JSON.stringify(payload));
+      return (
+        <div className="custom-tooltip">
+          <p className="label">{`${payload[0].name} : ${payload[0].value}`}</p>
+          {payload[0].payload.year ?
+          <p className="intro">{`Year : ${payload[0].payload.year}`}</p>
+          : null}
+          {payload[0].payload.title ?
+          <p className="intro">{`${payload[0].payload.title}`}</p>
+          : null}
+        </div>
+      );
+    }
+  
+    return null;
+  };
+
   return (
     <ResponsiveContainer width="100%" height={400}>
       <PieChart>
@@ -66,7 +86,7 @@ const XPieChart: React.FC<XPieChartProps> = ({apiUrl, convertJsonObject}) => {
             <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
           ))}
         </Pie>
-        <Tooltip />
+        <Tooltip content={<CustomTooltip />} />
       </PieChart>
     </ResponsiveContainer>
   );
