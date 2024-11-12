@@ -13,12 +13,15 @@ import TopCweChart from '../panels/TopCweChart';
 import TopExploitsChart from '../panels/TopExploitsChart';
 import TopTrendingVulnerabilityChart from '../panels/TopTrendingVulnerabilityChart';
 import VulnerabilityDisclosureChart from '../panels/VulnerabilityDisclosureChart';
+import HistoricGrowthTrendVulnChart from '../panels/HistoricGrowthTrendVulnChart';
 
 const Dashboard: React.FC = () => {
 
   return (
     <div>
       <h2>Dashboard</h2>
+
+      {/* Panel Row 1 */}
       <Grid container spacing={3} style={{ padding: 20 }}>
         <Grid item xs={12} sm={6} md={4}>
           <Paper style={{ padding: 20 }}>
@@ -39,6 +42,8 @@ const Dashboard: React.FC = () => {
           </Paper>
         </Grid>
       </Grid>
+
+      {/* Panel Row 2 */}
       <Grid container spacing={3} style={{ padding: 20}} >
         <Grid item xs={12} sm={6} md={4}>
           <Paper style={{ padding: 20 }}>
@@ -60,17 +65,28 @@ const Dashboard: React.FC = () => {
         </Grid>
       </Grid>
 
+      {/* Panel Row 3 */}
       <Grid container spacing={3} style={{ padding: 20}} >
-        <Grid item xs={12} sm={6} md={8}>
+        <Grid item xs={12} sm={6} md={6}>
           <Paper style={{ padding: 20 }}>
             <Typography variant="h6">Top Trending Vulnerabilities</Typography>
             <TopTrendingVulnerabilityChart />
           </Paper>
         </Grid>
-        <Grid item xs={12} sm={6} md={4}>
+        <Grid item xs={12} sm={6} md={6}>
           <Paper style={{ padding: 20 }}>
             <Typography variant="h6">Vulnerabilities with Recent Disclosures</Typography>
             <VulnerabilityDisclosureChart />
+          </Paper>
+        </Grid>
+      </Grid>
+
+      {/* Panel Row 4 */}
+      <Grid container spacing={3} style={{ padding: 20}} >
+        <Grid item xs={12} sm={6} md={12}>
+          <Paper style={{ padding: 20 }}>
+            <Typography variant="h6">Historical Growth Trend of Vulnerabilities Over Time</Typography>
+            <HistoricGrowthTrendVulnChart />
           </Paper>
         </Grid>
       </Grid>
