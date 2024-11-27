@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import {useNavigate} from "react-router-dom";
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from 'recharts';
 
 import { handleLogout } from '../helpers/utils';
@@ -12,6 +13,7 @@ interface XPieChartProps {
 }
 
 const XPieChart: React.FC<XPieChartProps> = ({apiUrl, convertJsonObject}) => {
+  const navigate = useNavigate();
   const [data, setData ] = useState([]);
   const token = window.localStorage.getItem('token');
 
@@ -29,6 +31,8 @@ const XPieChart: React.FC<XPieChartProps> = ({apiUrl, convertJsonObject}) => {
         console.log(err)
         if(err.status == 401) {
           handleLogout();
+        } else if(err.status == 429) {
+          navigate("/error");
         }
       });
     },

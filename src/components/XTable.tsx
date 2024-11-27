@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import {useNavigate} from "react-router-dom";
 
 import { handleLogout } from '../helpers/utils';
 import './XTable.css';
@@ -40,6 +41,7 @@ interface XTableProps {
 }
 
 const XTable: React.FC<XTableProps> = ({apiUrl}) => {
+  const navigate = useNavigate();
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(DEFAULT_ROWS_PER_PAGE);
   const [data, setData ] = useState([]);
@@ -59,6 +61,8 @@ const XTable: React.FC<XTableProps> = ({apiUrl}) => {
         console.log(err)
         if(err.status == 401) {
           handleLogout();
+        } else if(err.status == 429) {
+          navigate("/error");
         }
       });
     },
