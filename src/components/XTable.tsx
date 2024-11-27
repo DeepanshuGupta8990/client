@@ -75,7 +75,7 @@ const XTable: React.FC<XTableProps> = ({apiUrl}) => {
     setPage(0);
   };
 
-  const getRenderValue = (value: any, idx: number) => {
+  const getRenderValue = (value: any) => {
     // if(idx == 2) {
     //     const date = new Date(value); 
     //     // Using toLocaleDateString() for basic formatting
@@ -114,7 +114,7 @@ const XTable: React.FC<XTableProps> = ({apiUrl}) => {
                 <TableRow key={i}>
                     {
                         Object.values(row).map((value: any, j) => (
-                            <TableCell key={j}>{getRenderValue(value, j)}</TableCell>
+                            <TableCell key={j}>{getRenderValue(value)}</TableCell>
                         ))
                     }
                 </TableRow>

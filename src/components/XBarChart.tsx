@@ -75,7 +75,7 @@ const XBarChart: React.FC<XBarChartProps> = ({apiUrl, convertJsonObject}) => {
       {/* <Legend /> */}
 
       <Bar dataKey="value">
-        {data.map((entry, index) => (
+        {data.map((_entry, index) => (
             <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
         ))}
     </Bar>

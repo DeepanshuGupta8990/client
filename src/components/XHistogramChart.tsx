@@ -56,7 +56,7 @@ const XHistogramChart: React.FC<XHistogramChartProps> = ({
         <YAxis />
         <Tooltip />
 
-        {dataKeys.map((entry, index) => (
+        {dataKeys.map((_entry, index) => (
             <Bar dataKey={dataKeys[index]} fill={COLORS[index % COLORS.length]} />
         ))}
 

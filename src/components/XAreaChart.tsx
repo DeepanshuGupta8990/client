@@ -63,7 +63,7 @@ const XAreaChart: React.FC<XHistogramChartProps> = ({
         <Area type="monotone" dataKey="pv" stackId="1" stroke="#82ca9d" fill="#82ca9d" />
         <Area type="monotone" dataKey="amt" stackId="1" stroke="#ffc658" fill="#ffc658" /> */}
 
-        {dataKeys.map((entry, index) => (
+        {dataKeys.map((_entry, index) => (
             <Area type="monotone" stackId={1} dataKey={dataKeys[index]} fill={COLORS[index % COLORS.length]} />
         ))}
       </AreaChart>
