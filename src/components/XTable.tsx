@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import { handleLogout } from '../helpers/utils';
 import './XTable.css';
@@ -20,48 +20,55 @@ const DEFAULT_ROWS_PER_PAGE = 10;
 const ROWS_PER_PAGE_OPTIONS = [10, 25, 50, 100];
 
 function getTitleCase(text: String) {
-    if(text) {
-        const result = text.replace(/([A-Z])/g, " $1");
-        const finalResult = result.charAt(0).toUpperCase() + result.slice(1);
-        return finalResult;
-    } else {
-        return text;
-    }
+  if (text) {
+    const result = text.replace(/([A-Z])/g, " $1");
+    const finalResult = result.charAt(0).toUpperCase() + result.slice(1);
+    return finalResult;
+  } else {
+    return text;
+  }
 }
 
 function getHeadings(data: {}[]) {
-    if(!data || data.length == 0) return [];
-    return Object.keys(data[0]).map((key) => {
-        return getTitleCase(key);
-    });
+  if (!data || data.length == 0) return [];
+  return Object.keys(data[0]).map((key) => {
+    return getTitleCase(key);
+  });
 }
 
 interface XTableProps {
-    apiUrl: string;
+  apiUrl: string;
+  uri: string;
 }
 
-const XTable: React.FC<XTableProps> = ({apiUrl}) => {
+const XTable: React.FC<XTableProps> = ({ apiUrl, uri }) => {
   const navigate = useNavigate();
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(DEFAULT_ROWS_PER_PAGE);
-  const [data, setData ] = useState([]);
+  const [data, setData] = useState([]);
   const token = window.localStorage.getItem('token');
 
   useEffect(
     () => {
       // API call to the server
-      axios.get(apiUrl, {
+      axios.request({
+        method: "POST",
+        url: apiUrl,
         headers: {
-          Authorization: `Bearer ${token}`
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json"
+        },
+        data: {
+          start_offset: 1,
+          end_offset: 10
         }
       }).then((res) => {
-        console.log(res.data.data);
-        setData(res.data.data);
+        setData(res.data[uri]);
       }).catch((err) => {
         console.log(err)
-        if(err.status == 401) {
+        if (err.status == 401) {
           handleLogout();
-        } else if(err.status == 429) {
+        } else if (err.status == 429) {
           navigate("/error");
         }
       });
@@ -104,11 +111,11 @@ const XTable: React.FC<XTableProps> = ({apiUrl}) => {
         <Table>
           <TableHead className='table-header'>
             <TableRow>
-                {
-                    getHeadings(data).map((title, i) => (
-                        <TableCell key={i}>{title}</TableCell>
-                    ))
-                }
+              {
+                getHeadings(data).map((title, i) => (
+                  <TableCell key={i}>{title}</TableCell>
+                ))
+              }
             </TableRow>
           </TableHead>
           <TableBody>
@@ -116,11 +123,11 @@ const XTable: React.FC<XTableProps> = ({apiUrl}) => {
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((row, i) => (
                 <TableRow key={i}>
-                    {
-                        Object.values(row).map((value: any, j) => (
-                            <TableCell key={j}>{getRenderValue(value)}</TableCell>
-                        ))
-                    }
+                  {
+                    Object.values(row).map((value: any, j) => (
+                      <TableCell key={j}>{getRenderValue(value)}</TableCell>
+                    ))
+                  }
                 </TableRow>
               ))}
           </TableBody>

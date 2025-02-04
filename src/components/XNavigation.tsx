@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Sidebar, Menu, MenuItem, SubMenu } from 'react-pro-sidebar';
 import CottageIcon from '@mui/icons-material/Cottage';
 import SecurityIcon from '@mui/icons-material/Security';
@@ -18,11 +18,11 @@ const XNavigation = () => {
   return (
     <Sidebar collapsed={collapsed}>
       <div className="closemenu" onClick={() => setCollapsed(!collapsed)}>
-          {/* changing menu collapse icon on click */}
+        {/* changing menu collapse icon on click */}
         {collapsed ? (
-          <ArrowRightIcon/>
+          <ArrowRightIcon />
         ) : (
-          <ArrowLeftIcon/>
+          <ArrowLeftIcon />
         )}
       </div>
       <Menu>
@@ -33,8 +33,8 @@ const XNavigation = () => {
           <MenuItem onClick={() => navigate('/cve')} icon={<AddModeratorIcon />}>
             CVE
           </MenuItem>
-          <MenuItem onClick={() => navigate('/cvss_score')} icon={<AddModeratorIcon />}>
-            CVSS Score
+          <MenuItem onClick={() => navigate('/cwe')} icon={<AddModeratorIcon />}>
+            CWE
           </MenuItem>
           <MenuItem onClick={() => navigate('/cpe')} icon={<LocalPoliceIcon />}>
             CPE

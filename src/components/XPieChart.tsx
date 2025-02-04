@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from 'recharts';
 
 import { handleLogout } from '../helpers/utils';
@@ -12,40 +12,43 @@ interface XPieChartProps {
   convertJsonObject: (data: any) => []
 }
 
-const XPieChart: React.FC<XPieChartProps> = ({apiUrl, convertJsonObject}) => {
+const XPieChart: React.FC<XPieChartProps> = ({ apiUrl, convertJsonObject }) => {
   const navigate = useNavigate();
-  const [data, setData ] = useState([]);
+  const [data, setData] = useState([]);
   const token = window.localStorage.getItem('token');
 
   useEffect(
     () => {
       // API call to the server
-      axios.get(apiUrl, {
+      axios.request({
+        method: "POST",
+        url: apiUrl,
         headers: {
           Authorization: `Bearer ${token}`
-        }
+        },
+        data: {}
       }).then((res) => {
-        const convObj = convertJsonObject(res.data.data);
+        const convObj = convertJsonObject(res.data.reports);
         setData(convObj);
       }).catch((err) => {
         console.log(err)
-        if(err.status == 401) {
+        if (err.status == 401) {
           handleLogout();
-        } else if(err.status == 429) {
+        } else if (err.status == 429) {
           navigate("/error");
         }
       });
     },
     []
   );
-  
+
   const RADIAN = Math.PI / 180;
   const renderCustomizedLabel = (obj: any) => {
     const { cx, cy, midAngle, innerRadius, outerRadius, percent } = obj;
     const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
     const x = cx + radius * Math.cos(-midAngle * RADIAN);
     const y = cy + radius * Math.sin(-midAngle * RADIAN);
-  
+
     return (
       <text x={x} y={y} fill="white" textAnchor={x > cx ? 'start' : 'end'} dominantBaseline="central">
         {`${(percent * 100).toFixed(0)}%`}
@@ -56,20 +59,20 @@ const XPieChart: React.FC<XPieChartProps> = ({apiUrl, convertJsonObject}) => {
   const CustomTooltip = (obj: any) => {
     const { active, payload } = obj;
     if (active && payload && payload.length) {
-        console.log(JSON.stringify(payload));
+      console.log(JSON.stringify(payload));
       return (
         <div className="custom-tooltip">
           <p className="label">{`${payload[0].name} : ${payload[0].value}`}</p>
           {payload[0].payload.year ?
-          <p className="intro">{`Year : ${payload[0].payload.year}`}</p>
-          : null}
+            <p className="intro">{`Year : ${payload[0].payload.year}`}</p>
+            : null}
           {payload[0].payload.title ?
-          <p className="intro">{`${payload[0].payload.title}`}</p>
-          : null}
+            <p className="intro">{`${payload[0].payload.title}`}</p>
+            : null}
         </div>
       );
     }
-  
+
     return null;
   };
 
