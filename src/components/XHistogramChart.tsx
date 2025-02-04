@@ -7,66 +7,65 @@ import { handleLogout } from '../helpers/utils';
 const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#AA1142'];
 
 interface XHistogramChartProps {
-  apiUrl: string;
-  dataKeys: Array<string>;
-  xAxisKey: string;
+    apiUrl: string;
+    dataKeys: Array<string>;
+    xAxisKey: string;
 }
 
 const XHistogramChart: React.FC<XHistogramChartProps> = ({
-  apiUrl,
-  dataKeys = ["count", "exploit_count", "patch_count", "detection_count"],
-  xAxisKey = 'name'
+    apiUrl,
+    dataKeys = ["count", "exploit_count", "patch_count", "detection_count"],
+    xAxisKey = 'name'
 }) => {
 
-  const [data, setData] = useState([]);
-  const token = window.localStorage.getItem('token');
+    const [data, setData] = useState([]);
+    const token = window.localStorage.getItem('token');
 
-  useEffect(
-    () => {
-      // API call to the server
-      axios.request({
-        method: "POST",
-        url: apiUrl,
-        headers: {
-          Authorization: `Bearer ${token}`
+    useEffect(
+        () => {
+            // API call to the server
+            axios.request({
+                method: "GET",
+                url: apiUrl,
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            }).then((res) => {
+                console.log(res.data.data);
+                setData(res.data.reports);
+            }).catch((err) => {
+                console.log(err)
+                if (err.status == 401) {
+                    handleLogout();
+                }
+            });
         },
-        data: {}
-      }).then((res) => {
-        console.log(res.data.data);
-        setData(res.data.reports);
-      }).catch((err) => {
-        console.log(err)
-        if (err.status == 401) {
-          handleLogout();
-        }
-      });
-    },
-    []
-  );
+        []
+    );
 
-  return (
-    <ResponsiveContainer width="100%" height={400}>
-      <BarChart
-        data={data}
-        margin={{
-          top: 20,
-          right: 30,
-          left: 20,
-          bottom: 5,
-        }}
-      >
-        <XAxis dataKey={xAxisKey} />
-        <YAxis />
-        <Tooltip />
+    return (
+        <ResponsiveContainer width="100%" height={400}>
+            <BarChart
+                data={data}
+                margin={{
+                    top: 20,
+                    right: 30,
+                    left: 20,
+                    bottom: 5,
+                }}
+            >
+                <XAxis dataKey={xAxisKey} />
+                <YAxis />
+                <Tooltip />
 
-        {dataKeys.map((_entry, index) => (
-          <Bar dataKey={dataKeys[index]} fill={COLORS[index % COLORS.length]} />
-        ))}
+                {dataKeys.map((_entry, index) => (
+                    <Bar dataKey={dataKeys[index]} fill={COLORS[index % COLORS.length]} />
+                ))}
 
-        <Legend />
-      </BarChart>
-    </ResponsiveContainer>
-  );
+                <Legend />
+            </BarChart>
+        </ResponsiveContainer>
+    );
 };
 
 export default XHistogramChart;

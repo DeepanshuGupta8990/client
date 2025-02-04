@@ -21,12 +21,11 @@ const XBarChart: React.FC<XBarChartProps> = ({ apiUrl, convertJsonObject }) => {
         () => {
             // API call to the server
             axios.request({
-                method: "POST",
+                method: "GET",
                 url: apiUrl,
                 headers: {
                     Authorization: `Bearer ${token}`
-                },
-                data: {}
+                }
             }).then((res) => {
                 const convObj = convertJsonObject(res.data.reports);
                 setData(convObj);
