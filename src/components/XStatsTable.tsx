@@ -41,7 +41,7 @@ interface XTableProps {
     uri: string;
 }
 
-const XTable: React.FC<XTableProps> = ({ apiUrl, uri }) => {
+const XStatsTable: React.FC<XTableProps> = ({ apiUrl, uri }) => {
     const navigate = useNavigate();
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(DEFAULT_ROWS_PER_PAGE);
@@ -52,15 +52,11 @@ const XTable: React.FC<XTableProps> = ({ apiUrl, uri }) => {
         () => {
             // API call to the server
             axios.request({
-                method: "POST",
+                method: "GET",
                 url: apiUrl,
                 headers: {
                     Authorization: `Bearer ${token}`,
                     "Content-Type": "application/json"
-                },
-                data: {
-                    start_offset: 1,
-                    end_offset: 10
                 }
             }).then((res) => {
                 setData(res.data[uri]);
@@ -146,4 +142,4 @@ const XTable: React.FC<XTableProps> = ({ apiUrl, uri }) => {
     );
 };
 
-export default XTable;
+export default XStatsTable;

@@ -17,6 +17,7 @@ import PatchesPage from "./pages/PatchesPage"
 import PackagesPage from "./pages/PackagesPage";
 import CvssScorePage from "./pages/CvssScorePage";
 import LimitErrorPage from "./pages/LimitErrorPage";
+import StatsPage from "./pages/StatsPage";
 
 function App() {
     return (
@@ -35,6 +36,7 @@ function App() {
                         <Route path="/cpe" element={<CpePage />} />
                         <Route path="/patches" element={<PatchesPage />} />
                         <Route path="/packages" element={<PackagesPage />} />
+                        <Route path="/status" element={<StatsPage />} />
 
                         <Route path="/settings" element={<SettingsPage />} />
                         <Route path="/*" element={<Dashboard />} />
