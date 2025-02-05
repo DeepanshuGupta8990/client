@@ -119,24 +119,30 @@ const XTable: React.FC<XTableProps> = ({ apiUrl, uri }) => {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {data
-                            .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                            .map((row, i) => (
-                                <TableRow key={i}>
-                                    {
-                                        Object.values(row).map((value: any, j) => (
+                        {Array.isArray(data) && data.length > 0 ? (
+                            data
+                                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                                .map((row, i) => (
+                                    <TableRow key={i}>
+                                        {Object.values(row).map((value: any, j) => (
                                             <TableCell key={j}>{getRenderValue(value)}</TableCell>
-                                        ))
-                                    }
-                                </TableRow>
-                            ))}
+                                        ))}
+                                    </TableRow>
+                                ))
+                        ) : (
+                            <TableRow>
+                                <TableCell colSpan={1} align="center">
+                                    No data available
+                                </TableCell>
+                            </TableRow>
+                        )}
                     </TableBody>
                 </Table>
             </TableContainer>
             <TablePagination
                 rowsPerPageOptions={ROWS_PER_PAGE_OPTIONS}
                 component="div"
-                count={data.length}
+                count={Array.isArray(data) && data.length ? data.length : 0}
                 rowsPerPage={rowsPerPage}
                 page={page}
                 onPageChange={handleChangePage}
