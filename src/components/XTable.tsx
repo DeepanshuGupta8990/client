@@ -19,6 +19,7 @@ import {
 const DEFAULT_ROWS_PER_PAGE = 10;
 const ROWS_PER_PAGE_OPTIONS = [10, 25, 50, 100];
 
+/*
 function getTitleCase(text: String) {
     if (text) {
         const result = text.replace(/([A-Z])/g, " $1");
@@ -34,6 +35,23 @@ function getHeadings(data: {}[]) {
     return Object.keys(data[0]).map((key) => {
         return getTitleCase(key);
     });
+}
+*/
+function getHeadings2(data: {}[]): string[] {
+    if (!data || data.length === 0) return [];
+
+    function flattenKeys(obj: any, prefix = ''): string[] {
+        return Object.keys(obj).flatMap((key) => {
+            const newKey = prefix ? `${prefix}_${key}` : key;
+            if (typeof obj[key] === 'object' && obj[key] !== null && !Array.isArray(obj[key])) {
+                return flattenKeys(obj[key], newKey);
+            }
+            return newKey;
+        });
+    }
+    console.log("flattened headers: ", flattenKeys(data[0]));
+
+    return flattenKeys(data[0]);
 }
 
 interface XTableProps {
@@ -86,24 +104,19 @@ const XTable: React.FC<XTableProps> = ({ apiUrl, uri }) => {
         setPage(0);
     };
 
-    const getRenderValue = (value: any) => {
-        // if(idx == 2) {
-        //     const date = new Date(value); 
-        //     // Using toLocaleDateString() for basic formatting
-        //     // return date.toLocaleDateString(); 
-
-        //     const formattedDate = new Intl.DateTimeFormat('en-US', { 
-        //         year: 'numeric', 
-        //         month: 'long', 
-        //         day: 'numeric' 
-        //       }).format(date);
-        //     return formattedDate;  
-
-        // } else {
-        //     return value;
-        // }
-        return value;
+    function flattenObject(obj: any, prefix = ''): Record<string, any> {
+        return Object.keys(obj).reduce((acc, key) => {
+            const newKey = prefix ? `${prefix}_${key}` : key;
+            if (typeof obj[key] === 'object' && obj[key] !== null && !Array.isArray(obj[key])) {
+                Object.assign(acc, flattenObject(obj[key], newKey));
+            } else {
+                acc[newKey] = obj[key];
+            }
+            return acc;
+        }, {} as Record<string, any>);
     }
+
+    const flattenedData = data.map(row => flattenObject(row));
 
     return (
         <Paper>
@@ -112,20 +125,20 @@ const XTable: React.FC<XTableProps> = ({ apiUrl, uri }) => {
                     <TableHead className='table-header'>
                         <TableRow>
                             {
-                                getHeadings(data).map((title, i) => (
+                                getHeadings2(data).map((title, i) => (
                                     <TableCell key={i}>{title}</TableCell>
                                 ))
                             }
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {Array.isArray(data) && data.length > 0 ? (
-                            data
+                        {Array.isArray(flattenedData) && flattenedData.length > 0 ? (
+                            flattenedData
                                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                 .map((row, i) => (
                                     <TableRow key={i}>
-                                        {Object.values(row).map((value: any, j) => (
-                                            <TableCell key={j}>{getRenderValue(value)}</TableCell>
+                                        {Object.keys(row).map((key, j) => (
+                                            <TableCell key={j}>{row[key]}</TableCell>
                                         ))}
                                     </TableRow>
                                 ))
