@@ -16,15 +16,13 @@ import {config} from '../config'
 import { toast } from 'react-toastify'
 
 const LOGIN_API = config.authApiUrl + "/login"
-const GUEST_EMAIL = import.meta.env.VITE_GUEST_EMAIL || "guest@guest.com";
-const GUEST_PASSWORD = import.meta.env.VITE_GUEST_PASSWORD || "easy";
 
 const LoginPage = ( ) => {
   const navigate = useNavigate();
 
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
 
   const handleLogin = (e: any) => {
     e?.preventDefault();

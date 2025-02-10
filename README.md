@@ -10,7 +10,7 @@
 
 ## vFeed UI Server
 
-Zetafence vFeed is a large dataset of correlated vulnerability and threat intelligence feeds.
+Zetafence vFeed is a large dataset of correlated vulnerability and threat intelligence feeds. vFeed API server serves a list of vulnerability URIs (such as `/v1/vuln`) and is implemented using gRPC ORM Protobuf services and Python Flask REST APIs.
 
 ## vFeed UI Server Usage
 
@@ -18,10 +18,10 @@ To start UI service on default port using HTTPS, use the following commands:
 
 ```
 $ yarn install
-$ HTTPS=true REACT_APP_SERVER=localhost:7778 yarn start
+$ HTTPS=true REACT_APP_SERVER=localhost:7778 yarn dev
 ```
 
 <br/>Copyright (C)
     <a href="https://zetafence.com">
     <img align="center" width="85" src="https://img.shields.io/badge/Zetafence-8A2BE2" alt="Zetafence"/></a>
-2024.
+2025.
