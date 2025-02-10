@@ -81,7 +81,9 @@ const XTable: React.FC<XTableProps> = ({ apiUrl, uri }) => {
                     end_offset: 10
                 }
             }).then((res) => {
-                setData(res.data[uri]);
+                // check if backend returns data
+                if(res.data[uri])
+                    setData(res.data[uri]);
             }).catch((err) => {
                 console.log(err)
                 if (err.status == 401) {
