@@ -1,12 +1,20 @@
 import { useState } from 'react';
-import {Link} from "react-router-dom";
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import {config} from '../config';
-import './UserRegistrationPage.css';
+import { config } from '../config';
+import { toast } from 'react-toastify';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import Typography from '@mui/material/Typography';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+import Divider from '@mui/material/Divider';
 
-const REGISTER_API = config.authApiUrl + "/register"
+const REGISTER_API = config.authApiUrl + "/register";
 
 function UserRegistrationPage() {
+  const navigate = useNavigate();
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [fname, setFName] = useState('');
@@ -19,98 +27,104 @@ function UserRegistrationPage() {
     setPassword('');
     setFName('');
     setLName('');
-  }
+  };
 
   const registerUser = (e: any) => {
     e.preventDefault();
+
+    toast.loading("Registering...");
 
     // Clear signup and error message before submitting the request
     setError('');
     setSignup(false);
 
     axios
-          .post(REGISTER_API, {
-            email,
-            password,
-            firstname: fname,
-            lastname: lname
-          })
-          .then(() => {
-            resetFields();
-            setSignup(true);
-          })
-          .catch((err) => {
-            console.log(err);
-            setError(err.response.data.error);
-          });
-
+      .post(REGISTER_API, {
+        email,
+        password,
+        firstname: fname,
+        lastname: lname
+      })
+      .then(() => {
+        resetFields();
+        setSignup(true);
+        toast.dismiss();
+        toast.success("Registration successful!");
+        navigate("/login"); // Redirect to login page after successful registration
+      })
+      .catch((err) => {
+        toast.dismiss();
+        console.log(err);
+        setError(err.response?.data?.error || "Something went wrong, please try again later.");
+      });
   };
 
   return (
-    <div className="login-signup-container">
-      <form className="login-signup-form" onSubmit={registerUser}>
-        <h2>New User Registration</h2>
-        <div className="form-group">
-          <label htmlFor="email">Email:</label>
-          <input
-            type="email"
-            id="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="password">Password:</label>
-          <input
-            type="password"
-            id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </div>
+    <div className='bg-gray-200 h-[100vh]'>
+      <div className='flex flex-col justify-center items-center min-h-screen relative'>
+        <Card className='flex flex-col sm:w-[450px] sm:m-10 md:m-0'>
+          <CardContent className='p-6 sm:!p-12'>
+            <div className='flex flex-col gap-5'>
+              <div>
+                <Typography variant='h4'>{`Create a New Account 👋🏻`}</Typography>
+                <Typography className='mb-2'>Please fill in the details to register</Typography>
+              </div>
+              <form noValidate autoComplete='off' onSubmit={registerUser} className='flex flex-col gap-5'>
+                <TextField
+                  fullWidth
+                  label='First Name'
+                  type='text'
+                  value={fname}
+                  onChange={(e) => setFName(e.target.value)}
+                  required
+                />
+                <TextField
+                  fullWidth
+                  label='Last Name'
+                  type='text'
+                  value={lname}
+                  onChange={(e) => setLName(e.target.value)}
+                  required
+                />
+                <TextField
+                  autoFocus
+                  type='email'
+                  fullWidth
+                  label='Email'
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                />
+                <TextField
+                  fullWidth
+                  label='Password'
+                  type='password'
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                />
 
-        <div className="form-group">
-          <label htmlFor="fname">First Name:</label>
-          <input
-            type="text"
-            id="fname"
-            value={fname}
-            onChange={(e) => setFName(e.target.value)}
-            required
-          />
-        </div>
+                <Button fullWidth variant='contained' type='submit'>
+                  Sign Up
+                </Button>
 
-        <div className="form-group">
-          <label htmlFor="lname">Last Name:</label>
-          <input
-            type="text"
-            id="lname"
-            value={lname}
-            onChange={(e) => setLName(e.target.value)}
-            required
-          />
-        </div>
+                {signup && <Typography color='primary' className="text-center mt-2">User registered successfully.</Typography>}
 
+                {error && <Typography color="error" className="text-center mt-2">{error}</Typography>}
 
-        <div className='div-bottom-padding'>
-          <button type="submit" className="signup-button">
-            Sign Up
-          </button>
-        </div>
+                <Divider className='mt-4' >or</Divider>
 
-        { signup ? 
-            <div className='blue-text-padding'>User registered successfully.</div>  
-            : null
-          }
-
-        { error ? 
-            <div className='red-text-padding'>{error}</div>  
-            : null
-          }
-          <Link to={`/`}>Go to Login Page</Link>
-      </form>
+                <div className='flex justify-center items-center gap-2 mt-4'>
+                  <Typography>Already have an account?</Typography>
+                  <Typography component={Link} to='/login' color='primary'>
+                    Login here
+                  </Typography>
+                </div>
+              </form>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
     </div>
   );
 }
