@@ -6,8 +6,8 @@
 
 FROM node:18-alpine
 
-ENV NODE_ENV development
-ENV HTTPS true
+ENV NODE_ENV=development
+ENV HTTPS=true
 
 WORKDIR /app
 
