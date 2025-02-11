@@ -170,7 +170,6 @@ const LoginPage = ( ) => {
           </div>
         </CardContent>
       </Card>
-      {/* <Illustrations maskImg={{ src: authBackground }} /> */}
     </div>
 
     </div>
