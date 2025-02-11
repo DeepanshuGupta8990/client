@@ -1,6 +1,6 @@
 import {useNavigate} from "react-router-dom";
 import './Header.css';
-import logo from '../assets/react.svg'; 
+import logo from '../assets/vfeed.png'; 
 
 function Header() {
   const navigate = useNavigate();
@@ -19,7 +19,6 @@ function Header() {
         <div className="logo-container">
           <img src={logo} alt="Logo" className="logo" />
         </div>
-        <h1 className="title">Zetafence</h1>
         <div className="logout-container">
           <div className="div-padding-right">
             Welcome <span className="logout-span" onClick={() => navigate("/settings")}>{user}</span>
