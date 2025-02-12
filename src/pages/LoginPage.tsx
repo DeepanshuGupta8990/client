@@ -3,12 +3,9 @@ import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
 import Typography from '@mui/material/Typography'
 import TextField from '@mui/material/TextField'
-import IconButton from '@mui/material/IconButton'
-import InputAdornment from '@mui/material/InputAdornment'
 import Checkbox from '@mui/material/Checkbox'
 import Button from '@mui/material/Button'
 import FormControlLabel from '@mui/material/FormControlLabel'
-import Divider from '@mui/material/Divider'
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
@@ -16,8 +13,6 @@ import {config} from '../config'
 import { toast } from 'react-toastify'
 
 const LOGIN_API = config.authApiUrl + "/login"
-const GUEST_PASSWORD = import.meta.env.VITE_GUEST_PASSWORD || "easy";
-const GUEST_EMAIL = import.meta.env.VITE_GUEST_EMAIL || "guest@guest.com";
 const LoginPage = ( ) => {
   const navigate = useNavigate();
 
@@ -72,47 +67,6 @@ const LoginPage = ( ) => {
         console.error("Login error:", err);
       });
   };
-  
-  const loginAsGuest = async () => {
-    toast.loading("Logging in as Guest...");
-  
-    axios
-      .post(LOGIN_API, {
-        email: GUEST_EMAIL,
-        password: GUEST_PASSWORD,
-      })
-      .then((res) => {
-        if (res?.data?.token) {
-          console.log("Guest login successful, token received:", res.data.token);
-          window.localStorage.setItem('user', GUEST_EMAIL);
-          window.localStorage.setItem('token', res.data.token);
-  
-          toast.dismiss();
-          toast.success("Logged in as Guest!");
-          navigate("/home");
-        } else {
-          toast.dismiss();
-          toast.error("Unexpected response from server.");
-        }
-      })
-      .catch((err) => {
-        toast.dismiss();
-        
-        // Handle different error types based on status code
-        if (err?.response) {
-          const errorMessage = err.response?.data?.error || "Something went wrong, please try again later.";
-          toast.error(errorMessage);
-          setError(errorMessage);  // Optionally display the error message in your UI
-        } else if (err?.request) {
-          // No response was received (e.g., network error)
-          toast.error("Network error. Please check your connection.");
-        } else {
-          // Other errors (e.g., request setup errors)
-          toast.error("Error occurred while logging in.");
-        }
-        console.error("Guest login error:", err);
-      });
-  };
 
   return (
     <div className='bg-gray-200 h-[100vh]'>
@@ -163,10 +117,6 @@ const LoginPage = ( ) => {
                   Create an account
                 </Typography>
               </div>
-              <Divider className='gap-3'>or</Divider>
-              <Button fullWidth variant='outlined' type='button' onClick={() => loginAsGuest()} >
-              Guest Login
-              </Button>
             </form>
           </div>
         </CardContent>
