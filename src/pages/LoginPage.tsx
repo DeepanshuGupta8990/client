@@ -120,11 +120,11 @@ const LoginPage = ( ) => {
       <Card className='flex flex-col sm:is-[450px] sm:m-10 md:m-0'>
         <CardContent className='p-6 sm:!p-12'>
           <Link to='/' className='flex justify-center items-center mbe-6'>
-            {/* <Logo /> */}
+            <img width={200} src="/src/assets/vfeed.png"></img>
           </Link>
           <div className='flex flex-col gap-5'>
             <div>
-              <Typography variant='h4'>{`Welcome to !👋🏻`}</Typography>
+              <Typography className='flex justify-center items-center' variant='h5'>{`Welcome to Vfeed!👋🏻`}</Typography>
               <Typography className='mbs-1'>Please sign-in to your account</Typography>
             </div>
             <form noValidate autoComplete='off'onSubmit={handleLogin}  className='flex flex-col gap-5'>

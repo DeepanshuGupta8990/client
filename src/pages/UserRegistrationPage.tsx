@@ -65,9 +65,11 @@ function UserRegistrationPage() {
         <Card className='flex flex-col sm:w-[450px] sm:m-10 md:m-0'>
           <CardContent className='p-6 sm:!p-12'>
             <div className='flex flex-col gap-5'>
-              <div>
-                <Typography variant='h4'>{`Create a New Account 👋🏻`}</Typography>
-                <Typography className='mb-2'>Please fill in the details to register</Typography>
+
+              <div className='flex justify-center items-center flex-col' >
+                <img width={200} src="/src/assets/vfeed.png"></img>
+                <Typography variant='h5'>{`Create a New Account`}</Typography>
+                {/* <Typography className='mb-2'>Please fill in the details to register</Typography> */}
               </div>
               <form noValidate autoComplete='off' onSubmit={registerUser} className='flex flex-col gap-5'>
                 <TextField
