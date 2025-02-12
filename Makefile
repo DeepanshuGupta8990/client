@@ -32,7 +32,7 @@ docker-push:
 
 clean:
 	@echo "Cleaning $(WEBUI) files.."
-	@rm -rf build/ node_modules/ yarn.lock package-lock.json
+	@rm -rf build/ node_modules/
 	@echo "Done cleaning $(WEBUI) files.."
 
 .PHONY: all start clean docker-build docker-push

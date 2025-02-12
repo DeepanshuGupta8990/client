@@ -100,7 +100,7 @@ const LoginPage = ( ) => {
               
               <div className='flex justify-between items-center gap-x-3 gap-y-1 flex-wrap'>
                 <FormControlLabel control={<Checkbox />} label='Remember me' />
-                <Typography className='text-end' color='primary' component={Link} href='/forgot-password'>
+                <Typography className='text-end' color='primary' component={Link} to='/forgot-password'>
                   Forgot password?
                 </Typography>
               </div>

@@ -1,6 +1,6 @@
 import {useNavigate} from "react-router-dom";
 import './Header.css';
-import logo from '../assets/vfeed.png'; 
+import logo from '../assets/vfeed.png';
 
 function Header() {
   const navigate = useNavigate();
