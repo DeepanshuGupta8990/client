@@ -16,7 +16,8 @@ import {config} from '../config'
 import { toast } from 'react-toastify'
 
 const LOGIN_API = config.authApiUrl + "/login"
-
+const GUEST_PASSWORD = import.meta.env.VITE_GUEST_PASSWORD || "easy";
+const GUEST_EMAIL = import.meta.env.VITE_GUEST_EMAIL || "guest@guest.com";
 const LoginPage = ( ) => {
   const navigate = useNavigate();
 
