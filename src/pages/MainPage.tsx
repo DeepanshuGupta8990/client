@@ -8,7 +8,7 @@ function MainPage() {
   return (
     <div className="dashboard">
       <Header />
-      <div className="dashboard-content">
+      <div className="dashboard-content bg-gray-200">
         <Sidebar />
         <main className="main-content">
           <Outlet />
