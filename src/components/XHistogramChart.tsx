@@ -31,7 +31,7 @@ const XHistogramChart: React.FC<XHistogramChartProps> = ({
                     Authorization: `Bearer ${token}`
                 }
             }).then((res) => {
-                console.log(res.data.data);
+                console.log(res.data.reports);
                 setData(res.data.reports);
             }).catch((err) => {
                 console.log(err)

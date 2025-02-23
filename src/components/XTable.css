@@ -1,3 +1,12 @@
+/* Table Header */
 .table-header {
-  background-color: lightgray;
+  background-color: #f4f4f4;
+  font-weight: bold;
+}
+
+/* Tooltip styling */
+.MuiTooltip-tooltip {
+  max-width: 250px;
+  word-wrap: break-word;
+  white-space: normal;
 }
