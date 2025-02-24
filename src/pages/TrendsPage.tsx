@@ -2,10 +2,10 @@ import React from 'react';
 import { Grid, Paper, Typography } from '@mui/material';
 import MostAffectedPatchesChart from '../panels/MostAffectedPatchesChart'; // Your custom component for the third chart
 import { config } from '../config'; // Configuration file that holds API URLs
-import XLineChart from '../components/XLineChat';
+import XLineChart from '../components/XLineChart';
 import XAreaChart from '../components/XAreaChart';
 
-const TrandPage = () => {
+const TrendsPage = () => {
 
   // First Chart Config (Vulnerability Disclosures)
   const first = {
@@ -77,4 +77,4 @@ const TrandPage = () => {
   );
 };
 
-export default TrandPage;
+export default TrendsPage;
