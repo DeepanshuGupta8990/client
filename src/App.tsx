@@ -18,6 +18,7 @@ import PackagesPage from "./pages/PackagesPage";
 import CvssScorePage from "./pages/CvssScorePage";
 import LimitErrorPage from "./pages/LimitErrorPage";
 import StatsPage from "./pages/StatsPage";
+import TrendsPage from "./pages/TrendsPage";
 
 function App() {
     return (
@@ -31,6 +32,7 @@ function App() {
                     <Route path="error" element={<LimitErrorPage />} />
                     <Route element={<MainPage />}>
                         <Route path="/cve" element={<CvePage />} />
+                        <Route path="/trends" element={<TrendsPage />} />
                         <Route path="/cwe" element={<CwePage />} />
                         <Route path="/cvss_score" element={<CvssScorePage />} />
                         <Route path="/cpe" element={<CpePage />} />

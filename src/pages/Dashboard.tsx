@@ -22,8 +22,6 @@ const Dashboard: React.FC = () => {
 
     return (
         <div>
-            <h2>Dashboard</h2>
-
             {/* Panel Row 1 */}
             <Grid container spacing={3} style={{ padding: 20 }}>
                 <Grid item xs={12} sm={6} md={4}>

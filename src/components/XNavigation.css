@@ -12,3 +12,33 @@
   cursor: pointer;
   /* transition: width 0.3s ease-in-out; // Smooth transition */
 }
+
+.sidebar-container {
+  width: 240px;
+  transition: width 0.3s ease;
+}
+
+.closemenu {
+  cursor: pointer;
+}
+
+.menu-item {
+  font-size: 14px;
+  padding-left: 20px;
+}
+
+.submenu-item {
+  font-size: 13px;
+  padding-left: 40px;
+}
+
+/* Adjust hover effects */
+.menu-item:hover,
+.submenu-item:hover {
+  background-color: #f4f4f4;
+}
+
+/* Optional styles for collapsed state */
+.sidebar-container .pro-sidebar.collapsed {
+  width: 60px;
+}
