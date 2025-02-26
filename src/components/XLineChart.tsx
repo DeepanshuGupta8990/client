@@ -58,7 +58,7 @@
     }, [apiUrl, token, transformData]);
 
     return (
-      <ResponsiveContainer width="100%" height={400}>
+      <ResponsiveContainer width="100%" height={300}>
         <LineChart
           data={data}
           margin={{

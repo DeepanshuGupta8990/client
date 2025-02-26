@@ -1,9 +1,24 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell } from 'recharts';
-
+import { Skeleton, Box } from "@mui/material";
 import './XCharts.css'
 import { handleLogout } from '../helpers/utils';
+
+export const BarChartSkeleton = ({ bars = 5 }) => {
+    return (
+      <Box display="flex" alignItems="flex-end" gap={1} height={200}>
+        {[...Array(bars)].map((_, index) => (
+          <Skeleton
+            key={index}
+            variant="rectangular"
+            width={40}
+            height={Math.random() * 150 + 50} // Random height to simulate bar variations
+          />
+        ))}
+      </Box>
+    );
+  };
 
 const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#AA1142'];
 
@@ -15,11 +30,13 @@ interface XBarChartProps {
 const XBarChart: React.FC<XBarChartProps> = ({ apiUrl, convertJsonObject }) => {
 
     const [data, setData] = useState([]);
+    const [loading, setLoading] = useState(true);
     const token = window.localStorage.getItem('token');
 
     useEffect(
         () => {
             // API call to the server
+            setLoading(true);
             axios.request({
                 method: "GET",
                 url: apiUrl,
@@ -29,8 +46,10 @@ const XBarChart: React.FC<XBarChartProps> = ({ apiUrl, convertJsonObject }) => {
             }).then((res) => {
                 const convObj = convertJsonObject(res.data.reports);
                 setData(convObj);
+                setLoading(false);
             }).catch((err) => {
                 console.log(err)
+                setLoading(false);
                 if (err.status == 401) {
                     handleLogout();
                 }
@@ -58,30 +77,39 @@ const XBarChart: React.FC<XBarChartProps> = ({ apiUrl, convertJsonObject }) => {
 
 
     return (
-        <ResponsiveContainer width="100%" height={400}>
-            <BarChart
-                data={data}
-                maxBarSize={20}
-                margin={{
-                    top: 20,
-                    right: 30,
-                    left: 20,
-                    bottom: 5,
-                }}
-            >
+       <>
+       {
+        loading ?
+        <ResponsiveContainer width="60%" height={300} style={{marginInline: 'auto'}}>
+         <BarChartSkeleton bars={5} />
+         </ResponsiveContainer>
+          : 
+        <ResponsiveContainer width="100%" height={300}>
+        <BarChart
+            data={data}
+            maxBarSize={20}
+            margin={{
+                top: 20,
+                right: 30,
+                // left: 20,
+                bottom: 5,
+            }}
+        >
 
-                <XAxis dataKey="name" />
-                <YAxis />
-                <Tooltip content={<CustomTooltip />} />
-                {/* <Legend /> */}
+            <XAxis dataKey="name"  tick={{ fontSize: 14 }}/>
+            <YAxis />
+            <Tooltip content={<CustomTooltip />} />
+            {/* <Legend /> */}
 
-                <Bar dataKey="value">
-                    {data.map((_entry, index) => (
-                        <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                    ))}
-                </Bar>
-            </BarChart>
-        </ResponsiveContainer>
+            <Bar dataKey="value">
+                {data.map((_entry, index) => (
+                    <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                ))}
+            </Bar>
+        </BarChart>
+    </ResponsiveContainer>
+       }
+       </>
     );
 };
 
