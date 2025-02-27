@@ -55,9 +55,9 @@ const XNavigation = () => {
                     <MenuItem className='submenu-item' onClick={() => navigate('/attack-patterns')}>Attack Patterns CAPEC</MenuItem>
                 </SubMenu>
                 <SubMenu label={<b>Standards</b>} icon={<CategoryIcon />} defaultOpen>
-                    <MenuItem onClick={() => navigate('/capec')}>CAPEC</MenuItem>
-                    <MenuItem onClick={() => navigate('/mitre-weakness')}>MITRE Weakness</MenuItem>
-                    <MenuItem onClick={() => navigate('/mitre-attack')}>MITRE ATT&CK</MenuItem>
+                    <MenuItem className='submenu-item' onClick={() => navigate('/capec')}>CAPEC</MenuItem>
+                    <MenuItem className='submenu-item' onClick={() => navigate('/mitre-weakness')}>MITRE Weakness</MenuItem>
+                    <MenuItem className='submenu-item' onClick={() => navigate('/mitre-attack')}>MITRE ATT&CK</MenuItem>
                 </SubMenu>
                 <MenuItem onClick={() => navigate('/vuln-catalog')} icon={<BugReportIcon />}>
                     <b>Vuln Catalog</b>

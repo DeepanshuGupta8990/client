@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import { Paper, Box, TextField, Grid } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
-import { DataGrid, GridColDef } from '@mui/x-data-grid';
+import { DataGrid, GridColDef, GridPaginationModel } from '@mui/x-data-grid';
 import { debounce } from 'lodash';
 import { handleLogout } from '../helpers/utils';
 
@@ -16,14 +16,15 @@ const XTable: React.FC<XTableProps> = ({ apiUrl, uri }) => {
     const navigate = useNavigate();
     const [rows, setRows] = useState<any[]>([]);
     const [filteredRows, setFilteredRows] = useState<any[]>([]);
-    const [searchQuery, setSearchQuery] = useState<string>('');
-    const [page, setPage] = useState<number>(0);
-    const [rowsPerPage, setRowsPerPage] = useState<number>(10);
+    const [, setSearchQuery] = useState<string>('');
+    const [page,] = useState<number>(0);
+    const [rowsPerPage,] = useState<number>(10);
+    const [paginationModel, setPaginationModel] = useState<GridPaginationModel>({ page: 0, pageSize: 5 });
     const token = window.localStorage.getItem('token');
 
     useEffect(() => {
         fetchData();
-    }, [page, rowsPerPage]); // API fetches data whenever page or rowsPerPage changes
+    }, [paginationModel.page, paginationModel.pageSize]); // API fetches data whenever page or pageSize changes
 
     const fetchData = () => {
         axios.request({
@@ -67,7 +68,7 @@ const XTable: React.FC<XTableProps> = ({ apiUrl, uri }) => {
         }, {} as Record<string, any>);
     };
 
- const getColumns = (): GridColDef[] => {
+    const getColumns = (): GridColDef[] => {
         if (!rows.length) return [];
         return Object.keys(rows[0]).map((key) => {
             // Exclude 'id' and 'checkboxSelection' from the columns
@@ -91,7 +92,13 @@ const XTable: React.FC<XTableProps> = ({ apiUrl, uri }) => {
         ));
     }, 300);
 
+    const handlePaginationModelChange = (model: GridPaginationModel) => {
+        console.log("handlePaginationModelChange", model);
+        setPaginationModel(model);
+    };
+
     return (
+        // TBD reconsider Grid component
         <Box sx={{ padding: 2 }}>
             <Grid container spacing={2}>
                 <Grid item xs={12} sm={6}>
@@ -108,14 +115,15 @@ const XTable: React.FC<XTableProps> = ({ apiUrl, uri }) => {
                 <DataGrid
                     rows={filteredRows}
                     columns={getColumns()}
-                    pagination
-                    pageSize={5}
-                    rowsPerPageOptions={[5, 10, 25, 50]}
-                    // checkboxSelection
-                    disableSelectionOnClick
+                    initialState={{
+                        pagination: {
+                            paginationModel: { pageSize: 5, page: 0 },
+                        },
+                    }}
+                    pageSizeOptions={[5, 10, 25, 50]}
+                    disableRowSelectionOnClick
                     paginationMode="client"
-                    onPageChange={(newPage) => setPage(newPage)}
-                    onPageSizeChange={(newSize) => setRowsPerPage(newSize)}
+                    onPaginationModelChange={handlePaginationModelChange}
                     sx={{ border: 0 }}
                 />
             </Paper>
