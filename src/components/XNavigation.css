@@ -14,8 +14,11 @@
 }
 
 .sidebar-container {
+  background-color: #fff !important;
   width: 240px;
   transition: width 0.3s ease;
+  overflow: hidden !important;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2) !important;
 }
 
 .closemenu {
@@ -29,7 +32,7 @@
 
 .submenu-item {
   font-size: 13px;
-  padding-left: 40px;
+  padding-left: 30px;
 }
 
 /* Adjust hover effects */
@@ -41,4 +44,30 @@
 /* Optional styles for collapsed state */
 .sidebar-container .pro-sidebar.collapsed {
   width: 60px;
+}
+
+.sidebar-container .ps-sidebar-container  {
+  max-height: 100vh ;
+  overflow-y: auto ;
+  scrollbar-width: thin ;
+  scrollbar-color: #545252 #fff ;
+}
+
+/* Scrollbar for Webkit browsers */
+.sidebar-container .ps-sidebar-container::-webkit-scrollbar {
+  width: 6px ;
+}
+
+.sidebar-container .ps-sidebar-container::-webkit-scrollbar-thumb {
+  background: #666 ;
+  border-radius: 50px ;
+}
+
+.sidebar-container .ps-sidebar-container::-webkit-scrollbar-thumb:hover {
+  background: #888 ;
+}
+
+.sidebar-container .ps-sidebar-container::-webkit-scrollbar-track {
+  background: #2d2d3a ;
+  border-radius: 10px ;
 }
