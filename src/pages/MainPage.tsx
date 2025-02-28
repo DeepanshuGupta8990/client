@@ -1,10 +1,9 @@
-import './MainPage.css';
+import "./MainPage.css";
 import Header from "../layouts/Header";
 import Sidebar from "../layouts/Sidebar";
 import { Outlet } from "react-router-dom";
 
 function MainPage() {
-
   return (
     <div className="dashboard">
       <Header />

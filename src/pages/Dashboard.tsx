@@ -9,10 +9,10 @@ import TopCweChart from "../panels/TopCweChart";
 import TopExploitsChart from "../panels/TopExploitsChart";
 import TopTrendingVulnerabilityChart from "../panels/TopTrendingVulnerabilityChart";
 import VulnerabilityDisclosureChart from "../panels/VulnerabilityDisclosureChart";
-import HistoricGrowthTrendVulnChart from "../panels/HistoricGrowthTrendVulnChart";
-import ExploitGrowthTrendChart from "../panels/ExploitGrowthTrendChart";
+// import HistoricGrowthTrendVulnChart from "../panels/HistoricGrowthTrendVulnChart";
+// import ExploitGrowthTrendChart from "../panels/ExploitGrowthTrendChart";
 import ExploitMaturityChart from "../panels/ExploitMaturityChart";
-import HistoricGrowthTrendPackageVulnChart from "../panels/HistoricGrowthTrendPackageVulnChart";
+// import HistoricGrowthTrendPackageVulnChart from "../panels/HistoricGrowthTrendPackageVulnChart";
 
 const Dashboard: React.FC = () => {
   return (
@@ -21,7 +21,11 @@ const Dashboard: React.FC = () => {
       <Grid container spacing={3}>
         <Grid item xs={12} sm={6} md={4}>
           <Paper>
-            <Typography style={{ padding: 20 }} variant="h6">
+            <Typography
+              style={{ padding: 20 }}
+              variant="h6"
+              className="typography"
+            >
               CVE Top Vulnerability
             </Typography>
             <TopVulnerabilityChart />
@@ -29,7 +33,11 @@ const Dashboard: React.FC = () => {
         </Grid>
         <Grid item xs={12} sm={6} md={4}>
           <Paper>
-            <Typography style={{ padding: 20 }} variant="h6">
+            <Typography
+              style={{ padding: 20 }}
+              variant="h6"
+              className="typography"
+            >
               Top 10 Exploits
             </Typography>
             <TopExploitsChart />
@@ -37,7 +45,9 @@ const Dashboard: React.FC = () => {
         </Grid>
         <Grid item xs={12} sm={6} md={4}>
           <Paper style={{ padding: 20 }}>
-            <Typography variant="h6">Top CWEs</Typography>
+            <Typography variant="h6" className="typography">
+              Top CWEs
+            </Typography>
             <TopCweChart />
           </Paper>
         </Grid>
@@ -47,19 +57,25 @@ const Dashboard: React.FC = () => {
       <Grid container spacing={3} style={{ padding: "20px 0px" }}>
         <Grid item xs={12} sm={6} md={4}>
           <Paper style={{ padding: 20 }}>
-            <Typography variant="h6">Most Affected Patches Vendors</Typography>
+            <Typography variant="h6" className="typography">
+              Most Affected Patches Vendors
+            </Typography>
             <MostAffectedPatchesChart />
           </Paper>
         </Grid>
         <Grid item xs={12} sm={6} md={4}>
           <Paper style={{ padding: 20 }}>
-            <Typography variant="h6">Most Affected Package Vendors</Typography>
+            <Typography variant="h6" className="typography">
+              Most Affected Package Vendors
+            </Typography>
             <MostAffectedPackageChart />
           </Paper>
         </Grid>
         <Grid item xs={12} sm={6} md={4}>
           <Paper style={{ padding: 20 }}>
-            <Typography variant="h6">Vulnerability CPE Distribution</Typography>
+            <Typography variant="h6" className="typography">
+              Vulnerability CPE Distribution
+            </Typography>
             <VulnerabilityCpeDistributionChart />
           </Paper>
         </Grid>
@@ -67,30 +83,46 @@ const Dashboard: React.FC = () => {
 
       {/* Panel Row 3 */}
       <Grid container spacing={3} style={{ padding: "20px 0px" }}>
-      <Grid item xs={12} sm={6} md={4}>
-          <Paper >
-            <Typography variant="h6" style={{ padding: 20 }}>
+        <Grid item xs={12} sm={6} md={4}>
+          <Paper>
+            <Typography
+              variant="h6"
+              style={{ padding: 20 }}
+              className="typography"
+            >
               Vulnerabilities with Recent Disclosures
             </Typography>
             <VulnerabilityDisclosureChart />
           </Paper>
         </Grid>
         <Grid item xs={12} sm={6} md={4}>
-          <Paper >
-            <Typography style={{ padding: 20 }} variant="h6">Exploit Maturity Exploits</Typography>
+          <Paper>
+            <Typography
+              style={{ padding: 20 }}
+              variant="h6"
+              className="typography"
+            >
+              Exploit Maturity Exploits
+            </Typography>
             <ExploitMaturityChart />
           </Paper>
         </Grid>
         <Grid item xs={12} sm={6} md={4}>
           <Paper>
-            <Typography style={{ padding: 20 }} variant="h6">Top Trending Vulnerabilities</Typography>
+            <Typography
+              style={{ padding: 20 }}
+              variant="h6"
+              className="typography"
+            >
+              Top Trending Vulnerabilities
+            </Typography>
             <TopTrendingVulnerabilityChart />
           </Paper>
         </Grid>
       </Grid>
 
       {/* Panel Row 4 */}
-      <Grid container spacing={3} style={{ padding: 20 }}>
+      {/* <Grid container spacing={3} style={{ padding: 20 }}>
         <Grid item xs={12} sm={6} md={4}>
           <Paper style={{ padding: 20 }}>
             <Typography variant="h6">
@@ -108,10 +140,10 @@ const Dashboard: React.FC = () => {
             <HistoricGrowthTrendPackageVulnChart />
           </Paper>
         </Grid>
-      </Grid>
+      </Grid> */}
 
       {/* Panel Row 5 */}
-      <Grid container spacing={3} style={{ padding: 20 }}>
+      {/* <Grid container spacing={3} style={{ padding: 20 }}>
         <Grid item xs={12} sm={6} md={12}>
           <Paper style={{ padding: 20 }}>
             <Typography variant="h6">
@@ -120,7 +152,7 @@ const Dashboard: React.FC = () => {
             <HistoricGrowthTrendVulnChart />
           </Paper>
         </Grid>
-      </Grid>
+      </Grid> */}
     </div>
   );
 };

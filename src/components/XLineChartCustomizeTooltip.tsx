@@ -21,8 +21,6 @@ export const LineChartSkeleton = () => {
   };
   
 
-const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#AA1142'];
-
 interface XLineChartProps {
     apiUrl: string;
     convertJsonObject: (data: any) => [];

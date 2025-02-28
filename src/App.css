@@ -1,4 +1,6 @@
-
+body,.typography{
+  font-family: 'Inter' !important;
+}
 .login-signup-container {
   display: flex;
   justify-content: center;
