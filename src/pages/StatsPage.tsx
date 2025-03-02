@@ -1,19 +1,20 @@
-import { config } from '../config';
-import XStatsTable from '../components/XStatsTable';
+import { config } from "../config";
+import XStatsTable from "../components/XStatsTable";
+import { Text } from "../styled/header";
 
-const stats = "stats"
+const stats = "stats";
 
 const StatsPage = () => {
-    const STATS_URL = config.vfeedApiUrl + "/" + stats
+  const STATS_URL = config.vfeedApiUrl + "/" + stats;
 
-    return (
-        <div>
-            <h2>vFeed Status</h2>
-            <section className="widget">
-                <XStatsTable apiUrl={STATS_URL} uri={stats} />
-            </section>
-        </div>
-    )
-}
+  return (
+    <div>
+      <Text>vFeed Status</Text>
+      <section className="widget">
+        <XStatsTable apiUrl={STATS_URL} uri={stats} />
+      </section>
+    </div>
+  );
+};
 
-export default StatsPage
+export default StatsPage;
