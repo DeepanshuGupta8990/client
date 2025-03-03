@@ -14,7 +14,6 @@ import {
   Grid,
   Box,
   Typography,
-  Button,
 } from "@mui/material";
 import { KeyboardArrowDown, KeyboardArrowUp } from "@mui/icons-material";
 import { debounce } from "lodash";
@@ -22,6 +21,7 @@ import { handleLogout } from "../helpers/utils";
 import XNoDataFound from "./XNoDataFound";
 import {
   BoxContainer,
+  FilterButton,
   SearchContainer,
   SearchIcon,
   StyledTableCell,
@@ -199,14 +199,13 @@ const XTable: React.FC<XTableProps> = ({ apiUrl, uri }) => {
             "Last Month",
             "Last Year",
           ].map((filter) => (
-            <Button
-              style={{ padding: "4px 10px", fontSize: "12px" }}
+            <FilterButton
               key={filter}
               variant="contained"
               onClick={() => handleFilter(filter)}
             >
               {filter}
-            </Button>
+            </FilterButton>
           ))}
         </BoxContainer>
       </SearchContainer>

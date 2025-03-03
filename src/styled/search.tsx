@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { Box, TableCell, TextField } from "@mui/material";
+import { Box, Button, TableCell, TextField } from "@mui/material";
 import { Search } from "@mui/icons-material";
 
 export const SearchContainer = styled.div`
@@ -45,38 +45,6 @@ export const SearchIcon = styled(Search)`
   cursor: pointer;
 `;
 
-export const TimeFilter = styled(Box)`
-  display: flex;
-  border: 1px solid #1565c0;
-  border-radius: 5px;
-  margin-top: 20px;
-  @media screen and (max-width: 1290px) {
-    margin: 0px 0px 0px 20px;
-  }
-  @media screen and (max-width: 550px) {
-    width: 100%;
-    max-width: 400px;
-    flex-wrap: wrap;
-  }
-`;
-
-export const FilterButton = styled(Box)`
-  display: flex;
-  cursor: pointer;
-  padding: 5px;
-  align-items: center;
-  justify-content: center;
-  border-right: 1px solid #1565c0;
-  &:last-child {
-    border-right: 0px;
-  }
-
-  &:hover {
-    background: #1565c0;
-    color: #fff;
-  }
-`;
-
 export const BoxContainer = styled(Box)`
   display: flex;
   gap: 6px;
@@ -101,5 +69,18 @@ export const StyledTableCell = styled(TableCell)`
   position: relative;
   &:hover {
     overflow: visible;
+  }
+`;
+
+export const FilterButton = styled(Button)`
+  padding: 4px 10px;
+  font-size: 12px;
+  border: 1px dashed rgb(209, 213, 219);
+  color: rgb(75, 84, 99);
+  background-color: rgb(255, 255, 255);
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 2px 0px;
+  &:hover {
+    background-color: rgb(228, 227, 227);
+    border: 1px dashed rgb(228, 227, 227);
   }
 `;
