@@ -19,7 +19,7 @@ import {
 import { KeyboardArrowDown, KeyboardArrowUp } from "@mui/icons-material";
 import { debounce } from "lodash";
 import { handleLogout } from "../helpers/utils";
-import NoDataFound from "./NoDataFound";
+import XNoDataFound from "./XNoDataFound";
 import {
   BoxContainer,
   SearchContainer,
@@ -27,7 +27,7 @@ import {
   StyledTableCell,
   StyledTextField,
 } from "../styled/search";
-import CustomTooltip from "./CustomTooltip";
+import XCustomTooltip from "./XCustomTooltip";
 
 interface XTableProps {
   apiUrl: string;
@@ -237,7 +237,7 @@ const XTable: React.FC<XTableProps> = ({ apiUrl, uri }) => {
             </TableBody>
           </Table>
         ) : (
-          <NoDataFound />
+          <XNoDataFound message="No Data Found" />
         )}
       </TableContainer>
     </Box>
@@ -288,9 +288,9 @@ const Row: React.FC<{ row: any }> = ({ row }) => {
                     <TableRow>
                       {additionalKeys.map((key) => (
                         <StyledTableCell key={key}>
-                          <CustomTooltip text={String(row[key]) || "N/A"}>
+                          <XCustomTooltip text={String(row[key]) || "N/A"}>
                             <span>{String(row[key]) || "N/A"}</span>
-                          </CustomTooltip>
+                          </XCustomTooltip>
                         </StyledTableCell>
                       ))}
                     </TableRow>

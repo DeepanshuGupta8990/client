@@ -1,7 +1,7 @@
 import { Tooltip } from "@mui/material";
 import React, { useEffect, useRef, useState } from "react";
 
-const CustomTooltip: React.FC<{ text: string; children: React.ReactNode }> = ({
+const XCustomTooltip: React.FC<{ text: string; children: React.ReactNode }> = ({
   text,
   children,
 }) => {
@@ -30,4 +30,4 @@ const CustomTooltip: React.FC<{ text: string; children: React.ReactNode }> = ({
   );
 };
 
-export default CustomTooltip;
+export default XCustomTooltip;

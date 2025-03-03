@@ -8,14 +8,18 @@ const DivContainer = styled.div`
   padding: 6%;
 `;
 
-const NoDataFound = () => {
+interface XNoDataFoundProps {
+  message: string;
+}
+
+const XNoDataFound: React.FC<XNoDataFoundProps> = ({ message }) => {
   return (
     <DivContainer>
       <Typography style={{ padding: 20 }} className="typography">
-        No Data Found
+        {message}
       </Typography>
     </DivContainer>
   );
 };
 
-export default NoDataFound;
+export default XNoDataFound;
