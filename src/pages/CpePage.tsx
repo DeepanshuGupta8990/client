@@ -1,19 +1,20 @@
-import { config } from '../config';
-import XTable from '../components/XTable';
+import { config } from "../config";
+import XTable from "../components/XTable";
+import { Text } from "../styled/header";
 
-const cpes = "cpes"
+const cpes = "cpes";
 
 const CpePage = () => {
-  const CPE_API = config.vfeedApiUrl + "/" + cpes
+  const CPE_API = config.vfeedApiUrl + "/" + cpes;
 
   return (
     <div>
-      <h2>Platform Details</h2>
+      <Text>Platform Details</Text>
       <section className="widget">
         <XTable apiUrl={CPE_API} uri={cpes} />
       </section>
     </div>
-  )
-}
+  );
+};
 
-export default CpePage
+export default CpePage;

@@ -104,3 +104,13 @@ export const SidebarContent = styled.div`
     color: white;
   }
 `;
+
+export const Text = styled.h2`
+  font-size: 2rem;
+  text-align: left;
+  padding-left: 16px;
+
+  @media screen and (max-width: 768px) {
+    font-size: 1.5rem;
+  }
+`;
