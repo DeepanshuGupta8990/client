@@ -78,6 +78,7 @@ export const FilterButton = styled(Button)`
   border: 1px dashed rgb(209, 213, 219);
   color: rgb(75, 84, 99);
   background-color: rgb(255, 255, 255);
+  text-transform: capitalize;
   box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 2px 0px;
   &:hover {
     background-color: rgb(228, 227, 227);
