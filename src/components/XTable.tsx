@@ -14,6 +14,7 @@ import {
   Grid,
   Box,
   Typography,
+  TablePagination,
 } from "@mui/material";
 import { KeyboardArrowDown, KeyboardArrowUp } from "@mui/icons-material";
 import { debounce } from "lodash";
@@ -40,6 +41,8 @@ const XTable: React.FC<XTableProps> = ({ apiUrl, uri }) => {
   const [filteredRows, setFilteredRows] = useState<any[]>([]);
   const [searchQuery, setSearchQuery] = useState<string>("");
   const token = useMemo(() => window.localStorage.getItem("token"), []);
+  const [page, setPage] = useState<number>(0);
+  const [rowsPerPage, setRowsPerPage] = useState<number>(10);
 
   const fetchData = useCallback(
     async (start_date?: string, end_date?: string) => {
@@ -125,6 +128,17 @@ const XTable: React.FC<XTableProps> = ({ apiUrl, uri }) => {
     const query = event.target.value;
     setSearchQuery(query);
     handleSearch(query);
+  };
+
+  const handleChangeRowsPerPage = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0);
+  };
+
+  const handleChangePage = (_event: unknown, newPage: number) => {
+    setPage(newPage);
   };
 
   const formatDate = (date: Date) => date.toISOString().split("T")[0];
@@ -215,26 +229,39 @@ const XTable: React.FC<XTableProps> = ({ apiUrl, uri }) => {
         sx={{ marginTop: 2, overflowX: "auto" }}
       >
         {rows.length > 0 ? (
-          <Table sx={{ minWidth: 650 }}>
-            <TableHead>
-              <TableRow>
-                <TableCell />
-                {rows.length > 0 &&
-                  Object.keys(rows[0])
-                    .slice(0, 3)
-                    .map((key) => (
-                      <TableCell key={key} sx={{ fontWeight: "bold" }}>
-                        {key}
-                      </TableCell>
-                    ))}
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {filteredRows.map((row, index) => (
-                <Row key={index} row={row} />
-              ))}
-            </TableBody>
-          </Table>
+          <>
+            <Table sx={{ minWidth: 650 }}>
+              <TableHead>
+                <TableRow>
+                  <TableCell />
+                  {rows.length > 0 &&
+                    Object.keys(rows[0])
+                      .slice(0, 3)
+                      .map((key) => (
+                        <TableCell key={key} sx={{ fontWeight: "bold" }}>
+                          {key}
+                        </TableCell>
+                      ))}
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {filteredRows
+                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  .map((row, index) => (
+                    <Row key={index} row={row} />
+                  ))}
+              </TableBody>
+            </Table>
+            <TablePagination
+              rowsPerPageOptions={[5, 10, 20, 50]}
+              component="div"
+              count={filteredRows.length}
+              rowsPerPage={rowsPerPage}
+              page={page}
+              onPageChange={handleChangePage}
+              onRowsPerPageChange={handleChangeRowsPerPage}
+            />
+          </>
         ) : (
           <XNoDataFound message="No Data Found" />
         )}
