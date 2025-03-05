@@ -71,3 +71,7 @@
   background: #2d2d3a ;
   border-radius: 10px ;
 }
+
+.submenu .ps-menu-button{
+  padding-left: 28% !important;
+}

@@ -41,64 +41,82 @@ const XNavigation = () => {
           icon={<BugReportIcon />}
           defaultOpen
         >
-          <MenuItem onClick={() => navigate("/cve")}>CVE</MenuItem>
-          <MenuItem onClick={() => navigate("/cwe")}>CWE</MenuItem>
-          <MenuItem onClick={() => navigate("/cpe")}>CPE</MenuItem>
-          <MenuItem onClick={() => navigate("/recent")}>Recent</MenuItem>
-          <MenuItem onClick={() => navigate("/exploited")}>
-            Actively Exploited
-          </MenuItem>
-          <MenuItem onClick={() => navigate("/search")}>Search</MenuItem>
+          <div className="submenu">
+            <MenuItem onClick={() => navigate("/cve")} className="submenu">
+              CVE
+            </MenuItem>
+            <MenuItem onClick={() => navigate("/cwe")} className="submenu">
+              CWE
+            </MenuItem>
+            <MenuItem onClick={() => navigate("/cpe")} className="submenu">
+              CPE
+            </MenuItem>
+            <MenuItem onClick={() => navigate("/recent")} className="submenu">
+              Recent
+            </MenuItem>
+            <MenuItem onClick={() => navigate("/exploited")}>
+              Actively Exploited
+            </MenuItem>
+            <MenuItem onClick={() => navigate("/search")}>Search</MenuItem>
+          </div>
         </SubMenu>
         <SubMenu
           label={<b>Severity & Risks</b>}
           icon={<SecurityIcon />}
           defaultOpen
         >
-          <MenuItem onClick={() => navigate("/cvss_score")}>
-            CVSS Scores
-          </MenuItem>
-          <MenuItem onClick={() => navigate("/epss")}>EPSS Scores</MenuItem>
-          <MenuItem onClick={() => navigate("/cisa-kev")}>CISA KEV</MenuItem>
+          <div className="submenu">
+            <MenuItem onClick={() => navigate("/cvss_score")}>
+              CVSS Scores
+            </MenuItem>
+            <MenuItem onClick={() => navigate("/epss")}>EPSS Scores</MenuItem>
+            <MenuItem onClick={() => navigate("/cisa-kev")}>CISA KEV</MenuItem>
+          </div>
         </SubMenu>
         <SubMenu
           label={<b>Vulnerable Software</b>}
           icon={<AssessmentIcon />}
           defaultOpen
         >
-          <MenuItem onClick={() => navigate("/packages")}>Packages</MenuItem>
-          <MenuItem onClick={() => navigate("/patches")}>Patches</MenuItem>
-          <MenuItem onClick={() => navigate("/oss")}>OSS</MenuItem>
-          <MenuItem onClick={() => navigate("/defense")}>
-            Defense Available
-          </MenuItem>
+          <div className="submenu">
+            <MenuItem onClick={() => navigate("/packages")}>Packages</MenuItem>
+            <MenuItem onClick={() => navigate("/patches")}>Patches</MenuItem>
+            <MenuItem onClick={() => navigate("/oss")}>OSS</MenuItem>
+            <MenuItem onClick={() => navigate("/defense")}>
+              Defense Available
+            </MenuItem>
+          </div>
         </SubMenu>
         <SubMenu
           label={<b>Threat Intel</b>}
           icon={<ErrorOutlineIcon />}
           defaultOpen
         >
-          <MenuItem onClick={() => navigate("/advisories")}>
-            Vendor Advisories
-          </MenuItem>
-          <MenuItem onClick={() => navigate("/exploit-poc")}>
-            Exploit PoC
-          </MenuItem>
-          <MenuItem onClick={() => navigate("/affected-software")}>
-            Affected Software, CPE
-          </MenuItem>
-          <MenuItem onClick={() => navigate("/attack-patterns")}>
-            Attack Patterns CAPEC
-          </MenuItem>
+          <div className="submenu">
+            <MenuItem onClick={() => navigate("/advisories")}>
+              Vendor Advisories
+            </MenuItem>
+            <MenuItem onClick={() => navigate("/exploit-poc")}>
+              Exploit PoC
+            </MenuItem>
+            <MenuItem onClick={() => navigate("/affected-software")}>
+              Affected Software, CPE
+            </MenuItem>
+            <MenuItem onClick={() => navigate("/attack-patterns")}>
+              Attack Patterns CAPEC
+            </MenuItem>
+          </div>
         </SubMenu>
         <SubMenu label={<b>Standards</b>} icon={<CategoryIcon />} defaultOpen>
-          <MenuItem onClick={() => navigate("/capec")}>CAPEC</MenuItem>
-          <MenuItem onClick={() => navigate("/mitre-weakness")}>
-            MITRE Weakness
-          </MenuItem>
-          <MenuItem onClick={() => navigate("/mitre-attack")}>
-            MITRE ATT&CK
-          </MenuItem>
+          <div className="submenu">
+            <MenuItem onClick={() => navigate("/capec")}>CAPEC</MenuItem>
+            <MenuItem onClick={() => navigate("/mitre-weakness")}>
+              MITRE Weakness
+            </MenuItem>
+            <MenuItem onClick={() => navigate("/mitre-attack")}>
+              MITRE ATT&CK
+            </MenuItem>
+          </div>
         </SubMenu>
         <MenuItem
           onClick={() => navigate("/vuln-catalog")}
