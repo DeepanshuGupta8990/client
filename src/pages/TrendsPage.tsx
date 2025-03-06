@@ -63,16 +63,16 @@ const TrendsPage = () => {
                         <Typography variant="h6" className="typography">
                             Historical Vulnerability Trends
                         </Typography>
-                        {/* <XLineChart
+                        <XLineChart
               apiUrl={thired.apiUrl} 
               dataKeys={thired.dataKeys} 
               xAxisKey={thired.xAxisKey} 
-            /> */}
-                        <XAreaChart
+            />
+                        {/* <XAreaChart
                             apiUrl={thired.apiUrl}
                             dataKeys={thired.dataKeys}
                             xAxisKey={thired.xAxisKey}
-                        />
+                        /> */}
                         {/* <MostAffectedPatchesChart /> Custom chart for most affected patches */}
                     </Paper>
                 </Grid>

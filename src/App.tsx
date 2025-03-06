@@ -19,6 +19,8 @@ import CvssScorePage from "./pages/CvssScorePage";
 import LimitErrorPage from "./pages/LimitErrorPage";
 import StatsPage from "./pages/StatsPage";
 import TrendsPage from "./pages/TrendsPage";
+import ActivelyExloitedPage from "./pages/ActivelyExloitedPage";
+import VulnCatelog from "./pages/VulnCatelog";
 
 function App() {
     return (
@@ -36,9 +38,11 @@ function App() {
                         <Route path="/cwe" element={<CwePage />} />
                         <Route path="/cvss_score" element={<CvssScorePage />} />
                         <Route path="/cpe" element={<CpePage />} />
+                        <Route path="/exploited" element={<ActivelyExloitedPage/>} />
                         <Route path="/patches" element={<PatchesPage />} />
                         <Route path="/packages" element={<PackagesPage />} />
                         <Route path="/status" element={<StatsPage />} />
+                        <Route path="/vuln-catalog" element={<VulnCatelog />} />
 
                         <Route path="/settings" element={<SettingsPage />} />
                         <Route path="/*" element={<Dashboard />} />

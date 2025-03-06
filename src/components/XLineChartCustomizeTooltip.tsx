@@ -9,7 +9,7 @@ export const LineChartSkeleton = () => {
     return (
       <Box sx={{ width: "100%", height: 300, display: "flex", flexDirection: "column", justifyContent: "space-between", p: 2 }}>
         {[...Array(5)].map((_, index) => (
-          <Skeleton key={index} variant="rectangular" width="100%" height={2} animation="wave" />
+          <Skeleton key={index} variant="rectangular" width="100%" height={5} animation="wave" />
         ))}
         <Box sx={{ display: "flex", justifyContent: "space-between", mt: 2 }}>
           {[...Array(6)].map((_, index) => (
