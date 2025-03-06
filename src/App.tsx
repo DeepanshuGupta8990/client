@@ -21,6 +21,7 @@ import StatsPage from "./pages/StatsPage";
 import TrendsPage from "./pages/TrendsPage";
 import ActivelyExloitedPage from "./pages/ActivelyExloitedPage";
 import VulnCatelog from "./pages/VulnCatelog";
+import AdvisoryForm from "./pages/Search";
 
 function App() {
     return (
@@ -43,6 +44,7 @@ function App() {
                         <Route path="/packages" element={<PackagesPage />} />
                         <Route path="/status" element={<StatsPage />} />
                         <Route path="/vuln-catalog" element={<VulnCatelog />} />
+                        <Route path="/search" element={<AdvisoryForm />} />
 
                         <Route path="/settings" element={<SettingsPage />} />
                         <Route path="/*" element={<Dashboard />} />
